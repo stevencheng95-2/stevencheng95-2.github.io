@@ -75,6 +75,10 @@ h2{
     margin: 0;
 }
 
+.follow-me-icon{
+ padding: 0;
+}
+
 @keyframes colorChange {
     0% {
         background-color: #e74c3c; /* Reddish */
@@ -233,9 +237,132 @@ html,
 body {
     width: 100%;
     height: 100%;
-    background: #222;
+    margin: 0;
+    padding: 0;
 }
 
 svg {
     animation: rainbow 1s linear infinite;
+}
+
+/* 1. 背景容器修正 */
+.bg-vertical-marquee {
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  pointer-events: none;
+  user-select: none;
+  overflow: hidden;
+  display: flex;         /* 使用 flex 讓多條跑馬燈並排 */
+  justify-content: space-around; /* 讓跑馬燈平均分散在畫面上 */
+}
+
+/* 2. 跑馬燈軌道修正 */
+.marquee-track {
+  display: flex;
+  flex-direction: column; /* 讓內部的 span 垂直排列 */
+  white-space: nowrap;
+  font-size: 6vw;
+  font-weight: bold;
+  /* 關鍵：讓文字旋轉 90 度並直向排列 */
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  color: rgba(0, 0, 0, 1);
+
+background: linear-gradient(
+    to bottom,
+    #ff2400, #e81d1d, #e8b71d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3
+  );
+  background-size: 100% 200%;
+-webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+
+  animation: scroll-vertical 6s linear infinite,rainbow-move 3s linear infinite;;
+}
+
+.marquee-track span {
+  display: block;
+  padding: 2em 0; /* 增加文字垂直間的距離 */
+}
+
+/* 3. 動態垂直滾動 */
+@keyframes scroll-vertical {
+  from {
+    transform: translateY(100vh); /* 從螢幕最下方出現 */
+  }
+  to {
+    transform: translateY(-100%); /* 往上捲動直到自身長度消失 */
+  }
+
+
+}
+@keyframes rainbow-move {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 0% 100%; }
+}
+
+
+.dvd-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -5; /* 放在跑馬燈之上，內容之下 */
+  pointer-events: none; /* 防止擋住按鈕點擊 */
+}
+
+/* DVD 標誌本體 */
+.dvd-box {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 80px;
+
+  /* 初始顏色與發光效果 */
+  color: #00ff00;
+  filter: drop-shadow(0 0 10px currentColor);
+
+  /* 兩個動畫：x軸跑 13.5秒，y軸跑 7.8秒，時間避開倍數才會隨機反彈 */
+  animation:
+    dvd-move-x 4s linear infinite alternate,
+    dvd-move-y 2.35s linear infinite alternate,
+    dvd-color-change 3s linear infinite;
+}
+
+.dvd-box i {
+  font-size: 80px;
+}
+
+.dvd-text {
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+  margin-top: -5px;
+}
+
+/* X 軸移動動畫 */
+@keyframes dvd-move-x {
+  from { left: 0; }
+  to { left: calc(100vw - 120px); } /* 螢幕寬度減去標誌寬度 */
+}
+
+/* Y 軸移動動畫 */
+@keyframes dvd-move-y {
+  from { top: 0; }
+  to { top: calc(100vh - 80px); } /* 螢幕高度減去標誌高度 */
+}
+
+/* 隨機變色動畫 (增加經典感) */
+@keyframes dvd-color-change {
+  0%   { color: #ff0000; }
+  20%  { color: #00ff00; }
+  40%  { color: #0000ff; }
+  60%  { color: #ffff00; }
+  80%  { color: #ff00ff; }
+  100% { color: #00ffff; }
 }
