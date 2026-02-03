@@ -1,0 +1,68 @@
+
+.dvd-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -5;
+  pointer-events: none;
+}
+
+.dvd-box {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 80px;
+
+
+  color: #00ff00;
+  filter: drop-shadow(0 0 10px currentColor);
+
+
+  animation:
+    dvd-move-x 4s linear infinite alternate,
+    dvd-move-y 2.35s linear infinite alternate,
+    dvd-color-change 3s linear infinite;
+}
+
+.dvd-box i {
+  font-size: 80px;
+}
+
+.dvd-text {
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+  margin-top: -5px;
+}
+
+.profile-picc{
+  border-radius: 50%;
+  width: 60px;
+}
+
+
+@keyframes dvd-move-x {
+  from { left: 0; }
+  to { left: calc(100vw - 120px); }
+}
+
+
+@keyframes dvd-move-y {
+  from { top: 0; }
+  to { top: calc(100vh - 80px); }
+}
+
+
+@keyframes dvd-color-change {
+  0%   { color: #ff0000; }
+  20%  { color: #00ff00; }
+  40%  { color: #0000ff; }
+  60%  { color: #ffff00; }
+  80%  { color: #ff00ff; }
+  100% { color: #00ffff; }
+}
