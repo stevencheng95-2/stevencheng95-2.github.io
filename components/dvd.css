@@ -66,3 +66,56 @@
   80%  { color: #ff00ff; }
   100% { color: #00ffff; }
 }
+
+
+.dvd-container1 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -5;
+  pointer-events: none;
+}
+
+.dvd-box1 {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 80px;
+
+
+  color: #00ff00;
+  filter: drop-shadow(0 0 10px currentColor);
+
+
+  animation:
+    dvd-move-x 2s linear infinite alternate,
+    dvd-move-y 1.5s linear infinite alternate,
+    dvd-color-change 3s linear infinite;
+}
+
+.dvd-box1 i {
+  font-size: 80px;
+}
+
+.dvd-text1 {
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+  margin-top: -5px;
+}
+
+.profile-picc1{
+  border-radius: 50%;
+  width: 60px;
+  animation: spin 1s linear infinite alternate;
+}
+
+@keyframes spin1 {
+  from { transform: rotate(0deg) scale(0.5); }
+  to { transform: rotate(720deg) scale(3); }
+}

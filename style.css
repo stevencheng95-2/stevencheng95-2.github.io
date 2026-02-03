@@ -65,7 +65,14 @@ h2{
   font-weight: 500;
 }
 
+.containerss{
+  display: flex;
+}
+.containerss .containers{
+  width: 50%;
+  height: 100%;
 
+}
 
 .container {
   width: 500px;
