@@ -1,9 +1,14 @@
 .profile-pic{
   border-radius: 50%;
-  animation: spin 3s linear infinite;
+  animation: spin 3s linear infinite, colorChanges 2s linear infinite;
 }
 
 @keyframes spin {
   from { transform: rotate(0deg) scale(0.5); }
   to { transform: rotate(720deg) scale(3); }
+}
+
+@keyframes colorChanges {
+  from { filter: hue-rotate(0deg); }
+  to { filter: hue-rotate(360deg); }
 }
